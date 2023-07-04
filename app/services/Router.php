@@ -16,6 +16,11 @@ class Router
 
     public static function enable(): void
     {
-        print_r(self::$uriList);
+        $query = "/$_GET[route]";
+        foreach (self::$uriList as $route) {
+            if ($route['uri'] === $query) {
+                require_once "web/pages/$route[page].php";
+            }
+        }
     }
 }
