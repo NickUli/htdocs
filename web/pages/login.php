@@ -1,11 +1,16 @@
+<?php
+
+use app\services\Component;
+
+?>
 <!doctype html>
 <html lang="en">
 <?php
-require_once 'web/components/head.php';
+Component::addPart('head');
 ?>
 <body>
 <?php
-require_once 'web/components/navbar.php';
+Component::addPart('navbar');
 ?>
 <div class="container">
     <h2 class="mt-4">Sign in</h2>

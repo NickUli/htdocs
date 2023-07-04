@@ -1,11 +1,16 @@
+<?php
+
+use app\services\Component;
+
+?>
 <!doctype html>
 <html lang="en">
 <?php
-require_once 'web/components/head.php';
+Component::addPart('head');
 ?>
 <body>
 <?php
-require_once 'web/components/navbar.php';
+Component::addPart('navbar');
 ?>
 <h1>404 - page not found</h1>
 </body>
