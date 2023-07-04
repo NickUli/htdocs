@@ -4,8 +4,18 @@ namespace app\services;
 
 class Router
 {
-    public static function test()
+    private static array $uriList = [];
+
+    public static function getPage(string $uri, string $page): void
     {
-        echo 'test';
+        self::$uriList[] = [
+            'uri' => $uri,
+            'page' => $page
+        ];
+    }
+
+    public static function enable(): void
+    {
+        print_r(self::$uriList);
     }
 }
