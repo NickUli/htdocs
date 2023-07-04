@@ -20,7 +20,9 @@ class Router
         foreach (self::$uriList as $route) {
             if ($route['uri'] === $query) {
                 require_once "web/pages/$route[page].php";
+                die();
             }
         }
+        require_once 'web/errors/page404.php';
     }
 }
