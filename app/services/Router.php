@@ -14,13 +14,15 @@ class Router
         ];
     }
 
-    public static function post($uri, $class, $method): void
+    public static function post($uri, $class, $method, $formdata = false, $files = false): void
     {
         self::$uriList[] = [
             'post' => true,
             'uri' => $uri,
             'class' => $class,
-            'method' => $method
+            'method' => $method,
+            'formdata' => $formdata,
+            'files' => $files
         ];
     }
 
@@ -33,7 +35,13 @@ class Router
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $class = new $route['class'];
                         $method = $route['method'];
-                        $class->$method();
+                        if ($route['formdata'] && $route['files']) {
+                            $class->$method($_POST, $_FILES);
+                        } elseif ($route['formdata'] && !$route['files']) {
+                            $class->$method($_POST);
+                        } else {
+                            $class->$method($_POST);
+                        }
                     } else {
                         require_once 'web/errors/page404.php';
                     }
