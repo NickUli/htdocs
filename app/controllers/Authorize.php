@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class Auth
+class Authorize
 {
     public function register(): void
     {

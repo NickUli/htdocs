@@ -30,15 +30,17 @@ class Router
         foreach (self::$uriList as $route) {
             if ($route['uri'] === $query) {
                 if ($route['post'] ?? false) {
-                    echo $_SERVER['REQUEST_METHOD'];
-                    die();
-                    $class = new $route['class'];
-                    $method = $route['method'];
-                    $class->$method();
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $class = new $route['class'];
+                        $method = $route['method'];
+                        $class->$method();
+                    } else {
+                        require_once 'web/errors/page404.php';
+                    }
                 } else {
                     require_once "web/pages/$route[page].php";
-                    die();
                 }
+                die();
             }
         }
         require_once 'web/errors/page404.php';
