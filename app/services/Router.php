@@ -31,8 +31,6 @@ class Router
         $query = '/' . ($_GET['route'] ?? '');
         foreach (self::$uriList as $route) {
             if ($route['uri'] === $query) {
-//                echo $_SERVER['REQUEST_METHOD'];
-//                die();
                 if ($route['post'] ?? false) {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $class = new $route['class'];
@@ -45,7 +43,7 @@ class Router
                             $class->$method();
                         }
                     } else {
-                        self::error('404');
+                        self::error(404);
                     }
                 } else {
                     require_once "web/pages/$route[page].php";
@@ -53,13 +51,16 @@ class Router
                 die();
             }
         }
-        self::error('404');
+        self::error(404);
     }
 
-    private static function error($error): void
+    public static function error($error): void
     {
         require_once "web/errors/page$error.php";
     }
 
-    private static function redirect() {}
+    public static function redirect($uri): void
+    {
+        header("Location: $uri");
+    }
 }

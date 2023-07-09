@@ -12,6 +12,6 @@ Component::addPart('head');
 <?php
 Component::addPart('navbar');
 ?>
-<h1>500 - server`s error</h1>
+<h1>500 - error data</h1>
 </body>
 </html>
