@@ -6,7 +6,32 @@ use app\services\Router;
 
 class Authorize
 {
-    public function register($data = [], $files = ''): void
+    public function auth($data): void
+    {
+        $email = $data['email'];
+        $password = $data['password'];
+
+        $user = \R::findOne('users', 'email = $', [$email]);
+        if (!$user) {
+            die('User not found');
+        }
+        if (password_verify($password, $user->password)) {
+            session_start();
+            $_SESSION['user'] = [
+                'id' => $user->id,
+                'email' => $user->email,
+                'username' => $user->username,
+                'surname' => $user->surname,
+                'avatar' => $user->avatar,
+                'group' => $user->group
+            ];
+            Router::redirect('/profile');
+        } else {
+            die('Wrong login or password');
+        }
+    }
+
+    public function register($data, $files): void
     {
 
         /**
@@ -33,6 +58,7 @@ class Authorize
             $user->email = $email;
             $user->username = $username;
             $user->surname = $surname;
+            $user->group = 1;
             $user->avatar = "/$path";
             $user->password = password_hash($password, PASSWORD_DEFAULT);
             \R::store($user);
