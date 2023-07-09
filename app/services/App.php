@@ -23,7 +23,7 @@ class App
         $config = require_once 'config/db.php';
         if ($config['enable']) {
             \R::setup("mysql:
-            host=$config[host]';
+            host=$config[host];
             port=$config[port];
             dbname=$config[dbname]",
                 $config['username'],

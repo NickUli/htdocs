@@ -1,6 +1,7 @@
 <?php
 
 use app\services\App;
+use app\services\Debug;
 
 spl_autoload_register();
 

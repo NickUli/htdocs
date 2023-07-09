@@ -6,7 +6,7 @@ class Router
 {
     private static array $uriList = [];
 
-    public static function getPage(string $uri, string $page): void
+    public static function page(string $uri, string $page): void
     {
         self::$uriList[] = [
             'uri' => $uri,
@@ -31,6 +31,8 @@ class Router
         $query = '/' . ($_GET['route'] ?? '');
         foreach (self::$uriList as $route) {
             if ($route['uri'] === $query) {
+//                echo $_SERVER['REQUEST_METHOD'];
+//                die();
                 if ($route['post'] ?? false) {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $class = new $route['class'];
@@ -40,10 +42,10 @@ class Router
                         } elseif ($route['formdata'] && !$route['files']) {
                             $class->$method($_POST);
                         } else {
-                            $class->$method($_POST);
+                            $class->$method();
                         }
                     } else {
-                        require_once 'web/errors/page404.php';
+                        self::error('404');
                     }
                 } else {
                     require_once "web/pages/$route[page].php";
@@ -51,6 +53,13 @@ class Router
                 die();
             }
         }
-        require_once 'web/errors/page404.php';
+        self::error('404');
     }
+
+    private static function error($error): void
+    {
+        require_once "web/errors/page$error.php";
+    }
+
+    private static function redirect() {}
 }
