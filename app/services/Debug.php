@@ -6,17 +6,20 @@ class Debug
 {
     public static function getTable(): void
     {
+        $session = self::multiImplode($_SESSION ?? []);
         $get = self::multiImplode($_GET);
         $post = self::multiImplode($_POST);
         $files = self::multiImplode($_FILES);
         echo "
         <table style='margin: 0; padding: 0; width: 100%;'>
             <tr style='background: lightgray'>
-                <th style='background: lawngreen; width: 30%'>_GET</th>
-                <th style='background: orange; width: 30%'>_POST</th>
-                <th style='background: mediumpurple; width: 30%'>_FILES</th>
+                <th style='background: lightskyblue;'>_SESSION</th>
+                <th style='background: lawngreen;'>_GET</th>
+                <th style='background: orange;'>_POST</th>
+                <th style='background: mediumpurple;'>_FILES</th>
             </tr>
             <tr style='background: aliceblue; vertical-align: top;'>
+                <td><pre>$session</pre></td>
                 <td><pre>$get</pre></td>
                 <td><pre>$post</pre></td>
                 <td><pre>$files</pre></td>

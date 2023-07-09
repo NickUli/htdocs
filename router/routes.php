@@ -9,5 +9,6 @@ Router::page('/register', 'register');
 Router::page('/profile', 'profile');
 
 Router::post('/auth/register', Authorize::class, 'register', true, true);
+Router::post('/auth/login', Authorize::class, 'login', true);
 
 Router::enable();

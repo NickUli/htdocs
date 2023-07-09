@@ -2,16 +2,18 @@
 
 namespace app\controllers;
 
+use app\services\Debug;
 use app\services\Router;
 
 class Authorize
 {
-    public function auth($data): void
+    public function login($data): void
     {
+        Debug::getTable();
         $email = $data['email'];
         $password = $data['password'];
 
-        $user = \R::findOne('users', 'email = $', [$email]);
+        $user = \R::findOne('users', 'email = ?', [$email]);
         if (!$user) {
             die('User not found');
         }
