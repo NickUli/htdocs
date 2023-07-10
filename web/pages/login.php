@@ -2,7 +2,7 @@
 
 use app\services\Component;
 
-if ($_SESSION['user']) {
+if (isset($_SESSION['user'])) {
     \app\services\Router::redirect('/profile');
 }
 

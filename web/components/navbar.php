@@ -15,12 +15,16 @@
             </div>
         </div>
         <div class="navbar-nav">
-            <?php if (!$_SESSION['user']): ?>
+            <?php if (!($_SESSION['user'] ?? '')): ?>
                 <a class="nav-link" href="/login">Login</a>
                 <a class="nav-link" href="/register">Register</a>
             <?php else: ?>
                 <a class="nav-link" href="/profile">Profile</a>
-                <a class="nav-link" href="/logout">Logout</a>
+                <form method="post" action="/auth/logout">
+                    <input type="hidden" name="route">
+                    <a class="nav-link" style="cursor: pointer"
+                       onclick="this.parentNode.submit();">Logout</a>
+                </form>
             <?php endif; ?>
         </div>
     </div>

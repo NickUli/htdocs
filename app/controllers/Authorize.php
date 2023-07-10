@@ -69,4 +69,10 @@ class Authorize
             Router::error(500);
         }
     }
+
+    public function logout(): void
+    {
+        unset($_SESSION['user']);
+        Router::redirect('/login');
+    }
 }
