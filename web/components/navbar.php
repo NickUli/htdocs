@@ -15,8 +15,13 @@
             </div>
         </div>
         <div class="navbar-nav">
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/register">Register</a>
+            <?php if (!$_SESSION['user']): ?>
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+            <?php else: ?>
+                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/logout">Logout</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

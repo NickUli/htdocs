@@ -2,6 +2,10 @@
 
 use app\services\Component;
 
+if ($_SESSION['user']) {
+    \app\services\Router::redirect('/profile');
+}
+
 ?>
 <!doctype html>
 <html lang="en">

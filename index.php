@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use app\services\App;
 use app\services\Debug;
 
